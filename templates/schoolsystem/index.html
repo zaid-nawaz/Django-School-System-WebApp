@@ -1,0 +1,164 @@
+{% extends 'schoolsystem/base.html' %}
+
+
+{% block css %}
+<style>
+    .pushing{
+        position: relative;
+        bottom: 12rem;
+    }
+    .pos{
+        position: absolute;
+        bottom: 12rem;
+    }
+    .courseSection{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        bottom: 3rem;
+        font-family: 'Quicksand', sans-serif;
+    }
+    .firstrow , .thirdrow,.secondrow{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .firstrowelement , .thirdrowelement{
+        height: 10rem;
+    width: 26rem;
+    background-image: linear-gradient(135deg,#FEAC5E,#C779D0,#4BC0C8);
+    margin: 31px 1rem;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 26px;
+    color: white;
+    }
+   
+    .secondrowelement{
+        height: 10rem;
+    width: 40rem;
+    background-image: linear-gradient(135deg,#43cea2,#185a9d);
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px 1rem;
+    border-radius: 16px;
+    font-size: 26px;
+    color: white;
+    }
+    .hrsubject{
+        color: black;
+    height: 2px;
+    width: 28rem;
+    }
+    .eventSection{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    #eventimage{
+        width: 100%;
+        opacity: 0.5;
+        
+    }
+    .wrapimage{
+        background-color: black;
+    }
+    .eventlist{
+        position: absolute;
+        color: #a7a7a7;
+    font-size: 2.6rem;
+    left: 2rem;
+    margin-right: 28rem;
+    margin-top: 8rem;
+    /* list-style: none; */
+}
+   .eventitems{
+       margin: 15px 2px;
+    font-family: 'Quicksand', sans-serif;
+   } 
+   .eventitems:hover{
+       color: white;
+   }
+   .eventcards{
+       position: absolute;
+   }
+   .p{
+    font-size: 15px;
+   }
+   .p:hover{
+       color: white;
+   }
+   a{
+       text-decoration: none;
+   }
+</style>
+
+{% endblock %}
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active" data-bs-interval="10000">
+        <img src="media/deer.jpg" class="d-block w-100 pushing" alt="...">
+      </div>
+      <div class="carousel-item" data-bs-interval="2000">
+        <img src="media/mountain.jpg" class="d-block w-100 pushing" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="media/city2.jpg" class="d-block w-100 pushing" alt="...">
+      </div>
+    </div>
+    <button class="carousel-control-prev pos" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next pos" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+</div>
+<div class="courseSection">
+    <h1>Subject Lectures</h1>
+    <hr class="hrsubject">
+
+<div class="firstrow">
+    {% for i in firstrow %}
+ <a href="/videolectures/videolists/?sub={{i.coursename}}">  <div class="firstrowelement">{{i.coursename}}</div></a> 
+ <!-- <a href="/videolectures/videolists/?sub={{i.coursename}}">   <div class="firstrowelement">{{i.coursename}}</div></a> 
+    <a href="/videolectures/videolists/?sub={{i.coursename}}">   <div class="firstrowelement">{{i.coursename}}</div></a>  -->
+    {% endfor %}
+</div>
+<div class="secondrow">
+    {% for i in secondrow %}
+    <a href="/videolectures/videolists/?sub={{i.coursename}}">  <div class="secondrowelement">{{i.coursename}}</div></a> 
+        <!-- <a href="/videolectures/videolists/?sub={{i.coursename}}">   <div class="secondrowelement">{{i.coursename}}</div></a>  -->
+        {% endfor %}
+</div>
+<div class="thirdrow">
+    {% for i in thirdrow %}
+    <a href="/videolectures/videolists/?sub={{i.coursename}}">  <div class="thirdrowelement">{{i.coursename}}</div></a> 
+        <!-- <a href="/videolectures/videolists/?sub={{i.coursename}}"> <div class="thirdrowelement">{{i.coursename}}</div></a> 
+            <a href="/videolectures/videolists/?sub={{i.coursename}}">  <div class="thirdrowelement">{{i.coursename}}</div></a>  -->
+            {% endfor %}
+</div>
+</div>
+
+
+{% else %}
+<script>
+    window.location = '/authentications/login/';
+</script>
+{% endif %}
+
+
+  
+{% endblock %}

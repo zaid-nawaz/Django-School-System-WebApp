@@ -1,0 +1,127 @@
+{% extends 'signuplogin/basic.html' %}
+{% block css %}
+<style>
+    body{
+        background: url('../../media/bgforloginsignup.jpg') no-repeat center center/cover;
+        font-family: 'quicksand';
+    }
+.main{
+  
+    /* width: 25%; */
+    
+    width: 35%;
+    margin: auto;
+}
+#form{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #dbdbdb;
+    margin-top: 3rem;
+    background-color: #ffffff;
+
+}
+.itemofform{
+    margin: 4px 34px;
+    /* width: 20rem; */
+    padding: 2px 2px;
+    width: 80%;
+    border: 1px solid #dbdbdb;
+    background-color: #fafafa;
+}
+.itemofformforbutton{
+    margin: 4px 34px;
+    /* width: 20rem; */
+    padding: 2px 2px;
+    width: 80%;
+    border: 1px solid #dbdbdb; 
+}
+#name{
+    margin-top: 9rem;
+}
+.lowermain{
+    width: 35%;
+    border: 1px solid #dbdbdb;
+    /* margin: auto; */
+    padding: 0px 77px;
+    padding-top: 10px;
+    margin-top: 0.8rem;
+    margin-bottom: 2rem;
+    background-color: #ffffff;
+}
+.bttn{
+    margin-bottom: 2rem;
+    background-color: black;
+    color: white;
+}
+.bttn:hover{
+    color: white;
+}
+#logo{
+    font-size: 3rem;
+    ;
+    position: absolute;
+    top: 4rem;
+    left: 32rem;
+}
+#tagline{
+    position: absolute;
+    top: 8rem;
+    width: 16rem;
+    left: 33.7rem;
+    text-align: center;
+ 
+    color: #b9b9b9;
+}
+
+
+
+
+</style>
+{% endblock %}
+{% block body %}
+
+<div class="container uppermain">
+<div class="main">
+    <form action="/authentications/signup/?signname=student" id="form" method="POST" enctype="multipart/form-data"> {% csrf_token %}
+        <h4 id="logo">SchoolSystem</h4>
+        <p id="tagline">Use this platform to manage your students and teachers</p>
+    
+        <input type="text" name="name" id="name" class="itemofform" placeholder="username">
+        <input type="password" name="password" id="password" class="itemofform" placeholder="password">
+        
+        <input type="email" name="emailaddress" id="emailaddress" class="itemofform" placeholder="email">
+        <label for="studentpic" class="itemofform">Choose your Profile picture</label>
+        <input type="file" name="studentpic" id="studentpic" class="itemofform" style="display: none;">
+        <input type="number" name="classno" id="classno" placeholder="write your class number" class="itemofform">
+        <input type="text" name="quote" id="quote" placeholder="write your quote" class="itemofform">
+       <input type="number" name="rollno" class="itemofform" placeholder="roll number">
+       <input type="text" name="fathername" class="itemofform" placeholder="father name">
+       <input type="text" name="mothername" class="itemofform" placeholder="mother name">
+       <input type="text" name="prevyearpercent" class="itemofform" placeholder="your previous year percentages">
+        <textarea name="studentachievements" id="studentachievements" cols="20" rows="10" class="itemofform">Write your achievements</textarea>
+        <textarea name="studentdescription" id="studentdescription" cols="20" rows="10" class="itemofform">Write about yourself</textarea>
+        <input type="text" id="schoolname" name="schoolname" class="itemofform">
+        <input type="number" name="phonenumber" id="phonenumber" class="itemofform" placeholder="Phone number">
+        <input type="text" name="key" id="key" class="itemofform" placeholder="Student key">
+    <button type="submit" class="btn itemofformforbutton bttn">Sign Up</button>
+</form>
+</div>
+<div class="container lowermain">
+<p>Have an account? <a href="/authentications/login">Login</a></p>
+</div>
+</div>
+{% endblock %}
+{% block js %}
+<script>
+
+    let alertbutton = document.getElementsByClassName('alertbuttton');
+    let logo = document.getElementById('logo');
+    let tagline = document.getElementById('tagline');
+    Array.from(alertbutton).forEach((e)=>{
+        e.addEventListener('click',()=>{
+            logo.style.top = '4rem';
+            tagline.style.top = '8rem';
+        })
+    })
+</script>
+{% endblock %}

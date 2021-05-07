@@ -1,0 +1,96 @@
+{% extends 'profiles/base.html' %}
+
+{% block css %}
+<style>
+
+   
+    #footer{
+      margin-top: 24rem;
+    }
+    h1{
+      font-family: 'Quicksand';
+    }
+    .outerbox{
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+    }
+    .classboxcontainer,.personboxcontainer{
+      width: 50%;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #selectclass,#selectperson{
+      width: 50%;
+    height: 3rem;
+    border-radius: 7px;
+    }
+    .subBtn{
+      width: 63rem;
+    margin-top: 2rem;
+    border: none;
+    /* outline: none; */
+    height: 3rem;
+    font-family: 'Quicksand';
+    color: white;
+    border-radius: 7px;
+    background-color: black;
+    }
+</style>
+
+{% endblock %}
+{% block content %}
+<nav class="navbar navbar-light bg-light">
+    <form class="container-fluid" method="POST" action="/search/searchresults/">{% csrf_token %}
+      <div class="input-group">
+        <span class="input-group-text" id="basic-addon1"><img src="/media/search3.png" alt="" width="30px" height="30px"></span>
+        <input type="text" class="form-control" name="queryname" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+      </div>
+    </form>
+  </nav>
+  <!-- <div class="selectiontitles">
+  <h1>Select the Class</h1>
+  <h1>Select the person</h1>
+
+</div> -->
+<form action="/search/" method="POST"> {% csrf_token %}
+<div class="outerbox">
+  <div class="classboxcontainer">
+    <h1>Select the Class</h1>
+    
+    <select name="selecttheclass" id="selectclass">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+      <option value="11">11</option>
+      <option value="12">12</option>
+
+
+    </select>
+  </div>
+  <div class="personboxcontainer">
+    <h1>Select the Person</h1>
+    <select name="selecttheperson" id="selectperson">
+      <option value="student">Student</option>
+      <option value="teacher">Teacher</option>
+
+
+    </select>
+  </div>
+  <button type="submit" class="subBtn">Submit</button>
+</div>
+</form>
+
+
+{% endblock %}

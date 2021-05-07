@@ -1,0 +1,153 @@
+{% extends 'schoolsystem/base.html' %}
+{% block css %}
+<style>
+ .videocontainers{
+   display: flex;
+   flex-direction: column;
+   overflow-y: scroll;
+   height: 40rem;
+   width: 88rem;
+ }
+ .vidbox{
+   max-width: 320px;
+   height: 200px;
+   outline: none;
+    background-color: black;
+
+    margin: 1px 30px;
+ }
+ .othercourseselection{
+  background-color: #f1f1f1;
+    width: 42rem;
+    margin-left: 7rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+ }
+ .wholebodycontainer{
+   display: flex;
+   
+ }
+ .vidcard{
+  display: flex;
+ }
+ .vidcardtext{
+  font-family: 'Quicksand';
+    margin: 2rem 1px;
+ }
+ .coursecards{
+  color: white;
+    width: 20rem;
+    height: 4rem;
+    border-radius: 4px;
+
+background-image: linear-gradient(135deg,#FEAC5E,#C779D0,#4BC0C8);
+    background-image: linear-gradient(135deg,#43cea2,#185a9d);
+    margin: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* flex-direction: column; */
+    font-size: 17px;
+    font-family: 'Quicksand';
+
+ }
+ ::-webkit-scrollbar {
+    width: 0;  
+    background: transparent;  
+}
+p{
+  margin-top: 17px;
+}
+a{
+  text-decoration: none;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="wholebodycontainer">
+<div class="videocontainers">
+  {% for i in obj %}
+<div class="vidcard">
+<video class="vidbox" controls poster="/media/{{i.videothumbnail}}">
+    <source src="/media/{{i.videofile}}" type="video/mp4">
+
+  </video>
+  <div class="vidcardtext">
+  <h4>{{i.videoname}}</h4>
+  <p>{{i.videoDescription}}</p>
+</div>
+</div>
+{% endfor %}
+<!-- <div class="vidcard">
+  <video class="vidbox" controls poster="/media/mountain.jpg">
+      <source src="/media/videxample.mp4" type="video/mp4">
+  
+    </video>
+    <div class="vidcardtext">
+    <h4>Video Name</h4>
+    <p>Video Description , Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illum enim quas quisquam quam necessitatibus temporibus tempore et officia, atque pariatur incidunt.</p>
+  </div>
+  </div>
+  <div class="vidcard">
+    <video class="vidbox" controls poster="/media/mountain.jpg">
+        <source src="/media/videxample.mp4" type="video/mp4">
+    
+      </video>
+      <div class="vidcardtext">
+      <h4>Video Name</h4>
+      <p>Video Description , Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illum enim quas quisquam quam necessitatibus temporibus tempore et officia, atque pariatur incidunt.</p>
+    </div>
+    </div>
+    <div class="vidcard">
+      <video class="vidbox" controls poster="/media/mountain.jpg">
+          <source src="/media/videxample.mp4" type="video/mp4">
+      
+        </video>
+        <div class="vidcardtext">
+        <h4>Video Name</h4>
+        <p>Video Description , Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illum enim quas quisquam quam necessitatibus temporibus tempore et officia, atque pariatur incidunt.</p>
+      </div>
+      </div>
+      <div class="vidcard">
+        <video class="vidbox" controls poster="/media/mountain.jpg">
+            <source src="/media/videxample.mp4" type="video/mp4">
+        
+          </video>
+          <div class="vidcardtext">
+          <h4>Video Name</h4>
+          <p>Video Description , Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illum enim quas quisquam quam necessitatibus temporibus tempore et officia, atque pariatur incidunt.</p>
+        </div>
+        </div>
+        <div class="vidcard">
+          <video class="vidbox" controls poster="/media/mountain.jpg">
+              <source src="/media/videxample.mp4" type="video/mp4">
+          
+            </video>
+            <div class="vidcardtext">
+            <h4>Video Name</h4>
+            <p>Video Description , Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illum enim quas quisquam quam necessitatibus temporibus tempore et officia, atque pariatur incidunt.</p>
+          </div>
+          </div> -->
+
+
+
+
+
+</div>
+<div class="othercourseselection">
+  <h2 style="font-family: quicksand;">Other Courses</h2>
+  {% for i in objs %}
+  <a href="/videolectures/videolists/?sub={{i.coursename}}">
+  <div class="coursecards">
+    <p>{{i.coursename}}</p>
+  </div>
+</a>
+{% endfor %}
+ 
+ 
+</div>
+</div>
+{% endblock %}

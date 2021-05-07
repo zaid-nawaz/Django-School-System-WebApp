@@ -1,0 +1,54 @@
+{% extends 'schoolsystem/base.html' %}
+{% block css %}
+<style>
+
+    .backgroundimage{
+        width: 82rem;
+    height: 16rem;
+    background-image: linear-gradient(135deg,#FEAC5E,#C779D0,#4BC0C8);
+    background-image: linear-gradient(135deg,#43cea2,#185a9d);
+
+    }
+
+
+    .cardbody{
+        border: none;
+    margin: 2rem;
+    position: relative;
+    right: 1rem;
+    }
+    .cardtexts{
+        display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* font-size: 18px; */
+    font-family: 'Quicksand';
+    }
+</style>
+{% endblock %}
+
+ {% block content %}
+ <nav class="navbar navbar-light bg-light">
+    <form class="container-fluid" method="POST" action="/videolectures/">{% csrf_token %}
+      <div class="input-group">
+        <span class="input-group-text" id="basic-addon1"><img src="/media/search3.png" alt="" width="30px" height="30px"></span>
+        <input type="text" class="form-control" name="queryname" placeholder="Search Video Lectures" aria-label="Username" aria-describedby="basic-addon1">
+      </div>
+    </form>
+  </nav>
+  {% for i in obj %}
+  <a href="/videolectures/videolists/?sub={{i.coursename}}"> <div class="card bg-dark text-white cardbody">
+    <!-- <img src="" class="card-img" alt="...">https://source.unsplash.com/1600x900/?nature,water -->
+    <div class="backgroundimage">
+    <div class="card-img-overlay cardtexts">
+      <h5 class="card-title">{{i.coursename}}</h5>
+      <p class="card-text">{{i.coursedescription}}.</p>
+      <p class="card-text">Last updated 3 mins ago</p>
+    </div>
+</div>
+  </div></a>
+  {% endfor %}
+  
+  
+ {% endblock %}

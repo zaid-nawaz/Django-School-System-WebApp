@@ -1,0 +1,115 @@
+{% extends 'signuplogin/basic.html' %}
+{% block css %}
+<style>
+    body{
+       
+        background: url('../../media/bgforloginsignup.jpg') no-repeat center center/cover;
+        font-family: 'quicksand';
+    }
+
+.main{
+  
+    /* width: 25%; */
+    
+    width: 35%;
+    margin: auto;
+}
+#form{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #dbdbdb;
+    margin-top: 3rem;
+    background-color: #ffffff;
+
+}
+.itemofform{
+    margin: 4px 34px;
+    /* width: 20rem; */
+    padding: 2px 2px;
+    width: 80%;
+    border: 1px solid #dbdbdb;
+    background-color: #fafafa;
+}
+.itemofformforbutton{
+    margin: 4px 34px;
+    /* width: 20rem; */
+    padding: 2px 2px;
+    width: 80%;
+    border: 1px solid #dbdbdb; 
+}
+#name{
+    margin-top: 9rem;
+}
+.lowermain{
+    width: 35%;
+    border: 1px solid #dbdbdb;
+    /* margin: auto; */
+    padding: 0px 77px;
+    padding-top: 10px;
+    margin-top: 0.8rem;
+    margin-bottom: 2rem;
+    background-color: #ffffff;
+}
+.bttn{
+    margin-bottom: 2rem;
+    background-color: black;
+    color: white;
+}
+.bttn:hover{
+    color: white;
+}
+#logo{
+    font-size: 3rem;
+    /* font-family: 'Exo'; */
+    position: absolute;
+    top: 4rem;
+    left: 32rem;
+}
+#tagline{
+    position: absolute;
+    top: 8rem;
+    width: 16rem;
+    left: 33.7rem;
+    text-align: center;
+    /* font: message-box; */
+    color: #b9b9b9;
+}
+#footer{
+    margin-top: 14rem;
+}
+
+</style>
+{% endblock %}
+{% block body %}
+
+<div class="container uppermain">
+<div class="main">
+    <form action="/authentications/login/" id="form" method="POST"> {% csrf_token %}
+        <h4 id="logo">SchoolSystem</h4>
+        <p id="tagline">Use this platform to manage your students and teachers</p>
+    
+    <input type="text" name="Loginname" id="name" class="itemofform" placeholder="username">
+    
+    
+    <input type="password" name="Loginpassword" id="password" class="itemofform" placeholder="password">
+    <button type="submit" class="btn  itemofformforbutton bttn" >Login</button>
+</form>
+</div>
+<div class="container lowermain">
+<p>Don't have an account? <a href="/authentications/">Sign Up</a></p>
+</div>
+</div>
+{% endblock %}
+{% block js %}
+<script>
+  
+    let alertbutton = document.getElementById('alertbutton');
+    let logo = document.getElementById('logo');
+    let tagline = document.getElementById('tagline');
+    alertbutton.addEventListener('click',()=>{
+        logo.style.top = '4rem';
+        tagline.style.top = '8rem';
+    })
+
+</script>
+{% endblock %}

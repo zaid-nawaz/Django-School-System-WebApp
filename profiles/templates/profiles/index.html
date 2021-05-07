@@ -1,0 +1,235 @@
+{% extends 'profiles/base.html' %}
+{% block css %}
+<style>
+    .outlinecontainer{
+        display: flex;
+        
+    }
+    .normalprofile{
+        max-width: 30rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    
+    position: relative;
+   
+    background-color: #ececec;
+ 
+    }
+    .dpimg{
+        width: 200px;
+    height: 200px;
+    border: 2px solid white;
+    border-radius: 100px;
+    
+
+    
+    position: relative;
+    bottom: 6rem;
+    }
+    .recommendationsection{
+        background-color: #efefef;
+        width: 22rem;
+    }
+    .dpimgrecommend{
+        width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    border: 1px solid rgba(0,0,0,.25);
+    padding: 2px;
+    margin-right: 18px;
+    margin-left: 11px;
+    margin-top: 1px;
+    }
+    .detailprofile{
+        width: 51rem;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;;
+    padding: 3rem;
+    overflow-y:scroll;
+    height: 26rem;
+    }
+    ::-webkit-scrollbar {
+    width: 0;  
+    background: transparent;  
+}
+
+    .backgroundbox{
+        width: 100%;
+    height: 17rem;
+    border: 2px solid white;
+
+    background-image: linear-gradient(45deg, #002b8e, #ff6565);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    }
+    .achieve{
+        margin: 5px 0px;
+    }
+    .resultsdiv{
+        display: flex;
+    }
+    .pinformation{
+        font-size: 25px;
+    }
+    .desccontainer{
+        display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3rem;
+    }
+    .realdesc{
+        text-align: center;
+    }
+    .desctitle{
+        font-size: 23px;
+        margin-bottom: 0rem;
+    }
+    .hrsubject{
+        color: black;
+    height: 2px;
+    width: 28rem;
+    }
+    .checked{
+        color: orange;
+    }
+    .underdpname{
+        position: relative;
+    bottom: 4rem;
+    font-size: 36px;
+    }
+    .stars{
+        position: relative;
+    bottom: 3rem;
+    width: 11rem;
+    font-size: 30px;
+    height: 28px;
+    }
+    h6{
+        margin-bottom: 0rem;
+    }
+    .quote{
+        font-size: 4rem;
+    color: white;
+ 
+    }
+</style>
+{% endblock %}
+{% block content %}
+<div class="backgroundbox">
+<h3 class="quote">"{{studinfo.studentquote}}."</h3>
+</div>
+<div class="outlinecontainer">
+    <div class="normalprofile">
+        <img src="/media/{{studinfo.studentpic}}" class="dpimg" width="100px" height="100px" alt="">
+        <h4 class="underdpname">{{studinfo.studentname}}</h4>
+        <div class="stars">
+            {% for i in n %}
+            <span class="fa fa-star checked"></span>
+            {% endfor %}
+            {% for i in leftrating %}
+            <span class="fa fa-star"></span>
+            {% endfor %}
+        <!-- <span class="fa fa-star checked"></span>
+        <span class="fa fa-star checked"></span>
+        <span class="fa fa-star"></span>
+        <span class="fa fa-star"></span> -->
+    </div>
+        <ul style="position: relative;
+        bottom: 1rem;
+        padding: 0px 4rem;">
+        {% for item in studachieve %}
+            <li class="achieve">{{item}}</li>
+            <!-- <li class="achieve">{{item}}</li>
+            <li class="achieve">{{item}}</li>
+            <li class="achieve">{{item}}</li> -->
+        {% endfor %}
+        </ul>
+    </div>
+    <div class="detailprofile">
+       
+       <p class="pinformation"><b>Name</b> : {{studinfo.studentname}}</p>
+       <p class="pinformation"><b>Class</b>  : {{studinfo.studentclass}}</p>
+       <p class="pinformation"><b>Roll no</b>  : {{studinfo.studentrollno}}</p>
+       <p class="pinformation"><b>Contact</b>  : {{studinfo.studentcontactno}}</p>
+       <p class="pinformation"><b>Mother's Name</b>  : {{studinfo.studentmothername}}</p>
+       <p class="pinformation"><b>Father's Name</b>  : {{studinfo.studentfathername}}</p>
+
+       <div class="desccontainer">
+       <b class="desctitle">Description about the student</b>
+       <hr class="hrsubject">
+       <p class="realdesc">{{studinfo.studentDescription}}</p>
+    </div>
+    <div class="desccontainer">
+        <b class="desctitle">Previous Years Scores</b>
+        <hr class="hrsubject">
+    </div>
+        <div id="container" style="height: 20rem;"></div>
+    </div>
+    <div class="recommendationsection">
+        <h4>Students with same rating</h4>
+        {% for stud in allstud %}
+        <div class="resultsdiv">
+            <img src="/media/{{stud.studentpic}}" alt="" class="dpimgrecommend">
+            <div class="resultsdetail">
+                <h6>{{stud.studentname}}</h6>
+                <!-- <div>
+                    {% for i in n %}
+                    <span class="fa fa-star checked"></span>
+                    {% endfor %}
+                    {% for i in leftrating %}
+                    <span class="fa fa-star"></span>
+                    {% endfor %}
+                </div> -->
+                <div>
+                    {% for i in n %}
+                    <span class="fa fa-star checked"></span>
+                    {% endfor %}
+                    {% for i in leftrating %}
+                    <span class="fa fa-star"></span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+{% block js %}
+<script>
+      anychart.onDocumentReady(function() {
+ 
+        // set the data
+        var data = {
+            header: ["Grade", "Percentages"],
+            rows: [
+            {% for i in studprevpercent %}
+              ["{{forloop.counter0|add:studprevclass}}th grade", {{i}}],
+            //   ['6th grade', 64],
+            //   ["7th grade", 91],
+            //   ["8th grade", 89],
+            //   ["9th grade", 34],
+            //   ["10th grade", 97]
+            {% endfor %}
+        ]};
+ 
+        // create the chart
+        var chart = anychart.column();
+ 
+        // add the data
+        chart.data(data);
+ 
+        // set the chart title
+        chart.title("Previous Years scores of the student");
+ 
+        // draw
+        chart.container("container");
+        chart.draw();
+      });
+    </script>
+{% endblock %}

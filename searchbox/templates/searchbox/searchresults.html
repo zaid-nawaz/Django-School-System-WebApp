@@ -1,0 +1,200 @@
+{% extends 'schoolsystem/base.html' %}
+{% block css %}
+<style>
+body{
+    font-family: 'quicksand';
+}
+.resultsdiv{
+    display: flex;
+    /* width: 60%; */
+    margin-bottom: 1rem;
+}
+.wholecontainer{
+    display:flex;
+}
+.resultsection{
+    
+    width: 64%;
+    margin-right: 0rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: scroll;
+    max-height: 34rem;
+}
+h1{
+    margin-bottom: 0rem;
+    margin-top: 2rem;
+}
+.chooseclass{
+    width: 84px;
+    color: white;
+    background-color: black;
+    border: none;
+    border-radius: 5px;
+    margin: 10px;
+    height: 3rem;
+
+}
+.selectotherclasssection{
+    width: 40%;
+    background-color: #f7f7f7;
+    padding: 1px 3rem;
+}
+.dpimg{
+    border: 2px solid #cccccc;
+    border-radius: 50px;
+    margin-right: 25px;
+    margin-left: 25px;
+
+    padding: 3px;
+}
+
+.hrsubject{
+        color: black;
+    height: 2px;
+    width: 28rem;
+    }
+    .linksname{
+        text-decoration: none;
+        color: black;
+    }
+    #footer{
+        margin-top: 8rem;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<nav class="navbar navbar-light bg-light">
+    <form class="container-fluid" action="/search/searchresults/" method="POST">{% csrf_token %}
+      <div class="input-group">
+        <span class="input-group-text" id="basic-addon1"><img src="/media/search3.png" alt="" width="30px" height="30px"></span>
+        <input type="text" class="form-control" name="queryname"  placeholder="Student's\teacher's name" aria-label="Username" aria-describedby="basic-addon1">
+      </div>
+    </form>
+  </nav>
+  <div class="wholecontainer">
+      <div class="resultsection">
+          <h1>Search Results</h1>
+          <hr class="hrsubject">
+
+    {% for students in stud %}
+    <div class="resultsdiv">
+        <a href="/profiles?studid={{students.studentid}}"><img src="/media/{{students.studentpic}}" class="dpimg" alt="" width="100px" height="100px"></a>
+        <div class="resultsdetail">
+    <a href="/profiles?studid={{students.studentid}}" class="linksname"> <h3>{{students.studentname}}</h3></a>
+            <p>{{students.studentquote}}</p>
+        </div>
+    </div>
+        {% endfor %}
+
+        {% for teacher in tech %}
+        <div class="resultsdiv">
+            <a href="/profiles/teachers/?techid={{teacher.teacherid}}"><img src="/media/{{teacher.teacherpic}}" class="dpimg" alt="" width="100px" height="100px"></a>
+            <div class="resultsdetail">
+        <a href="/profiles/teachers/?techid={{teacher.teacherid}}" class="linksname"> <h3>{{teacher.teachername}}</h3></a>
+                <p>{{teacher.teacherquote}}</p>
+            </div>
+        </div>
+        {% endfor %}
+
+        {% for results in ses %}
+            {% if results.profession == 'student' %}
+        <div class="resultsdiv">
+            <a href="/profiles?studid={{results.studentid}}"><img src="/media/{{results.studentpic}}" class="dpimg" alt="" width="100px" height="100px"></a>
+            <div class="resultsdetail">
+        <a href="/profiles?studid={{results.studentid}}" class="linksname"> <h3>{{results.studentname}}</h3></a>
+                <p>{{results.studentquote}}</p>
+            </div>
+        </div>
+        {% else %}
+        <div class="resultsdiv">
+            <a href="/profiles/teachers/?techid={{results.teacherid}}"><img src="/media/{{results.teacherpic}}" class="dpimg" alt="" width="100px" height="100px"></a>
+            <div class="resultsdetail">
+        <a href="/profiles/teachers/?techid={{results.teacherid}}" class="linksname"> <h3>{{results.teachername}}</h3></a>
+                <p>{{results.teacherquote}}</p>
+            </div>
+        </div>
+        {% endif %}
+
+        
+        
+        {% endfor %}
+
+        {% for res in stutech %}
+        <div class="resultsdiv">
+            <a href="/profiles/?studid={{res.studentid}}"><img src="/media/{{res.studentpic}}" class="dpimg" alt="" width="100px" height="100px"></a>
+            <div class="resultsdetail">
+        <a href="/profiles/?studid={{res.studentid}}" class="linksname"> <h3>{{res.studentname}}</h3></a>
+                <p>{{res.studentquote}}</p>
+            </div>
+        </div>
+        {% endfor %}
+
+
+        
+        {% if notexist %}
+     
+        <div class="card text-center my-3">
+            <div class="card-header">
+              Note
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Something Went Wrong!</h5>
+              <p class="card-text">The username that you typed in does not exist.</p>
+              <a href="/" class="btn btn-dark">Go to home</a>
+            </div>
+            <div class="card-footer text-muted">
+              *only write username in the search bar not the class.
+            </div>
+          </div>
+
+
+    
+        {% endif %}
+     
+    
+        
+    </div>
+      <div class='selectotherclasssection'>
+          <h1 style="margin-left: 3rem;">Select Other class</h1>
+          <hr class="hrsubject">
+          <div class="chooseclasscontainer">
+              
+          <a href=""><button class="chooseclass">1</button></a>
+          <a href=""><button class="chooseclass">2</button></a>
+          <a href=""><button class="chooseclass">3</button></a>
+          <a href=""><button class="chooseclass">4</button></a>
+          <a href=""><button class="chooseclass">5</button></a>
+          <a href=""><button class="chooseclass">6</button></a>
+          <a href=""><button class="chooseclass">7</button></a>
+          <a href=""><button class="chooseclass">8</button></a>
+          <a href=""><button class="chooseclass">9</button></a>
+          <a href=""><button class="chooseclass">10</button></a>
+          <a href=""><button class="chooseclass">11</button></a>
+          <a href=""><button class="chooseclass">12</button></a>
+        </div>
+      <div>
+
+      </div>
+  </div>
+  </div>
+{% endblock %}
+{% block js %}
+  <script>
+    let choosecl = document.getElementsByClassName('chooseclass')
+    let choose = Array.from(choosecl)
+    console.log(choose)
+    choose.forEach(element => {
+        element.addEventListener('click',(e)=>{
+            e.preventDefault()
+            console.log(e.target.innerText)
+            window.location = `/search/allresults/?classno=${e.target.innerText}`
+        })
+    });
+
+
+    
+  </script>
+
+{% endblock %}
